@@ -4,9 +4,9 @@
         xmlns:selectors="using:DateTemplateByPropertyValueExample.Selectors"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="200"
-        Height="200"
-        Width="200"
+        mc:Ignorable="d" d:DesignWidth="330" d:DesignHeight="387"
+        Width="330"
+        Height="387"
         x:Class="DateTemplateByPropertyValueExample.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -18,26 +18,58 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <ItemsControl ItemsSource="{Binding Employees}">
-        <ItemsControl.ItemTemplate>
-            <selectors:EmployeeTemplateSelector>
-                <selectors:EmployeeTemplateSelector.ExecutiveTemplate>
-                    <DataTemplate>
-                        <Label Content="Label: Executive" Foreground="Red" Background="Bisque" />
-                    </DataTemplate>
-                </selectors:EmployeeTemplateSelector.ExecutiveTemplate>
-                <selectors:EmployeeTemplateSelector.ManagerTemplate>
-                    <DataTemplate>
-                        <Button Content="Button: Manager" Foreground="Aqua" />
-                    </DataTemplate>
-                </selectors:EmployeeTemplateSelector.ManagerTemplate>
-                <selectors:EmployeeTemplateSelector.WorkerTemplate>
-                    <DataTemplate>
-                        <TextBox Text="TextBox: Worker" Foreground="Green" />
-                    </DataTemplate>
-                </selectors:EmployeeTemplateSelector.WorkerTemplate>
-            </selectors:EmployeeTemplateSelector>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <Grid RowDefinitions="*,*,*">
+        <!-- This demonstrates an ItemsControl that displays the contents of an ObservableCollection of ViewModels
+        differently based on the value of a Public Property of the ViewModels --> 
+        <Border Grid.Row="0" BorderBrush="White" BorderThickness="1" Margin="4" Padding="4">
+            <ItemsControl ItemsSource="{Binding Employees}">
+                <ItemsControl.ItemTemplate>
+                    <selectors:EmployeeTemplateSelector>
+                        <selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                            <DataTemplate>
+                                <Label Content="Label: Executive" Foreground="Red" Background="Bisque" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                        <selectors:EmployeeTemplateSelector.ManagerTemplate>
+                            <DataTemplate>
+                                <Button Content="Button: Manager" Foreground="Aqua" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.ManagerTemplate>
+                        <selectors:EmployeeTemplateSelector.WorkerTemplate>
+                            <DataTemplate>
+                                <TextBox Text="TextBox: Worker" Foreground="Green" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.WorkerTemplate>
+                    </selectors:EmployeeTemplateSelector>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+        
+        <!-- This demonstrates using a ContentControl to display the contents of a ViewModel differently based on
+        the value a Public Properties of that ViewModel -->
+        <Border Grid.Row="2" BorderBrush="White" BorderThickness="1" Margin="2" Padding="4">
+            <ContentControl Content="{Binding Employees[1]}">
+                <ContentControl.DataTemplates>
+                    <selectors:EmployeeTemplateSelector>
+                        <selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                            <DataTemplate>
+                                <Label Content="Label: Executive" Foreground="Red" Background="Bisque" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                        <selectors:EmployeeTemplateSelector.ManagerTemplate>
+                            <DataTemplate>
+                                <Button Content="Button: Manager" Foreground="Aqua" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.ManagerTemplate>
+                        <selectors:EmployeeTemplateSelector.WorkerTemplate>
+                            <DataTemplate>
+                                <TextBox Text="TextBox: Worker" Foreground="Green" />
+                            </DataTemplate>
+                        </selectors:EmployeeTemplateSelector.WorkerTemplate>
+                    </selectors:EmployeeTemplateSelector>
+                </ContentControl.DataTemplates>
+            </ContentControl>
+        </Border>
+    </Grid>
     
 </Window>
