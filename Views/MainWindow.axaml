@@ -1,0 +1,43 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DateTemplateByPropertyValueExample.ViewModels"
+        xmlns:selectors="using:DateTemplateByPropertyValueExample.Selectors"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="200"
+        Height="200"
+        Width="200"
+        x:Class="DateTemplateByPropertyValueExample.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="DateTemplateByPropertyValue">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <ItemsControl ItemsSource="{Binding Employees}">
+        <ItemsControl.ItemTemplate>
+            <selectors:EmployeeTemplateSelector>
+                <selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                    <DataTemplate>
+                        <Label Content="Label: Executive" Foreground="Red" Background="Bisque" />
+                    </DataTemplate>
+                </selectors:EmployeeTemplateSelector.ExecutiveTemplate>
+                <selectors:EmployeeTemplateSelector.ManagerTemplate>
+                    <DataTemplate>
+                        <Button Content="Button: Manager" Foreground="Aqua" />
+                    </DataTemplate>
+                </selectors:EmployeeTemplateSelector.ManagerTemplate>
+                <selectors:EmployeeTemplateSelector.WorkerTemplate>
+                    <DataTemplate>
+                        <TextBox Text="TextBox: Worker" Foreground="Green" />
+                    </DataTemplate>
+                </selectors:EmployeeTemplateSelector.WorkerTemplate>
+            </selectors:EmployeeTemplateSelector>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    
+</Window>
